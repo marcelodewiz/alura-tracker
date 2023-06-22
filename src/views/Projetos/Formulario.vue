@@ -15,10 +15,11 @@
 </template>
 
 <script lang="ts">
-import { DefineComponent, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import { useStore } from '@/store';
-import { ADICIONA_PROJETO, ALTERA_PROJETO, NOTIFICAR } from '@/store/tipo-mutacoes';
+import { ADICIONA_PROJETO, ALTERA_PROJETO } from '@/store/tipo-mutacoes';
 import { TipoNotificacao } from '@/interfaces/INotificacao';
+import useNotificador from '@/hooks/notificador'
 
 export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
@@ -51,18 +52,16 @@ export default defineComponent({
             }
 
             this.nomeDoProjeto = "";
-            this.store.commit(NOTIFICAR, {
-                titulo: 'Novo Projeto Salvo',
-                texto: 'Prontinho seu projeto ja esta disponivel',
-                tipo: TipoNotificacao.SUCESSO
-            })
+            this.notificar(TipoNotificacao.SUCESSO, 'Excelente', 'O projeto foi cadastrado com sucesso!');
             this.$router.push('/projetos');
-        }
+        },
     },
     setup() {
         const store = useStore()
+        const { notificar } = useNotificador()
         return {
-            store
+            store,
+            notificar
         }
     }
 });
