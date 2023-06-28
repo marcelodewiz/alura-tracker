@@ -1,0 +1,45 @@
+{
+  "projetos": [
+    {
+      "id": 1,
+      "nome": "Alura Tracker"
+    },
+    {
+      "id": 2,
+      "nome": "Alura Tracker 3.0"
+    },
+    {
+      "nome": "projeto doido",
+      "id": 3
+    }
+  ],
+  "tarefas": [
+    {
+      "id": 1,
+      "duracaoEmSegundos": 120,
+      "descricao": "Configuração do ambiente 2",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker"
+      }
+    },
+    {
+      "duracaoEmSegundos": 3,
+      "descricao": "Refatoração do Vuex",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker"
+      },
+      "id": 2
+    },
+    {
+      "duracaoEmSegundos": 6,
+      "descricao": "teste tarefa doida",
+      "projeto": {
+        "nome": "projeto doido",
+        "id": 3
+      },
+      "id": 3
+    }
+  ]
+}
