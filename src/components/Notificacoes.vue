@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { DefineComponent, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import { useStore } from '@/store';
 import { computed } from '@vue/reactivity';
 import { TipoNotificacao } from '@/interfaces/INotificacao';
