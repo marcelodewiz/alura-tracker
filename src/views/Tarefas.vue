@@ -4,6 +4,15 @@
         <Box_div v-if="listaEstaVazia">
             Você não está muito produtivo hoje :(
         </Box_div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Digite para filtrar" v-model="filtro">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-search"></i>
+                </span>
+
+            </p>
+        </div>
         <div class="lista">
             <Tarefa_historico v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"
                 @aoTarefaClicada="selecionarTarefa" />
@@ -33,7 +42,7 @@
 </template>
   
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref, watchEffect } from 'vue';
 import Formulario from "../components/Fomulario.vue";
 import Tarefa_historico from "../components/Tarefa-historico.vue";
 import ITarefa from "../interfaces/ITarefa";
@@ -78,9 +87,16 @@ export default defineComponent({
         store.dispatch(OBTER_TAREFAS)
         store.dispatch(OBTER_PROJETOS)
 
+        const filtro = ref("")
+        //const tarefas = computed(() => store.state.tarefa.tarefas.filter(t => !filtro.value || t.descricao.includes(filtro.value)))
+
+        watchEffect(() => {
+            store.dispatch(OBTER_TAREFAS, filtro.value)
+        })
         return {
             tarefas: computed(() => store.state.tarefa.tarefas),
-            store
+            store,
+            filtro
         }
     }
 });
